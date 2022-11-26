@@ -67,18 +67,17 @@ Obrigado. 🙏🏻😊'''
                     sleep(1)
 
                 elif opc == '2':
-                    
+                    system('cls')
+                    self.header()
+                    print('\nDigite o numero com DDD (EX: 82912341234)')
+                    contato = input('> ').strip()
+
                     try:
-                        system('cls')
-                        self.header()
-                        print('\nDigite o numero com DDD (EX: 82912341234)')
-                        contato = input('> ').strip()
                         assert contato.isdigit()
                         assert len(contato) == 11
                         assert contato not in self.contatos
                         self.contatos.append(contato)
                         print('\nNÚMERO INSERIDO.')
-
                     except:
                         print('\nNÚMERO INVÁLIDO!')
 
