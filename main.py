@@ -152,7 +152,7 @@ Obrigado. 🙏🏻😊'''
                     sleep(1)
 
                 elif opc == 'S':
-                    print('\nSAINDO...')
+                    print('\nSAINDO..')
                     sleep(1)
                     break
 
