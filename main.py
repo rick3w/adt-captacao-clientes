@@ -87,43 +87,53 @@ Obrigado. 🙏🏻😊'''
 
                     while True:
 
-                        try:
-                            assert len(self.contatos) > 0
+                        if len(self.contatos) <= 0:
+                            print('\nNENHUM CONTATO INSERIDO!')
+                            sleep(1)
+                            break
+
+                        else:
                             system('cls')
                             print('CONTATOS INSERIDOS:\n')
 
                             for i, contato in enumerate(self.contatos):
-                                print(f'{i+1} - {contato}')
+                                print(f'{i} - {contato}')
 
                             print('\n[D] Deletar contato')
+                            print('[L] Limpar contatos')
                             print('[V] Voltar')
                             opc = input('> ').strip().upper()
-                            try:
-                                assert opc in ['D', 'V']
+
+                            if opc not in ['D', 'L', 'V']:
+                                print('\nOPÇÃO INVÁLIDA!')
+                                sleep(1)
+                            else:
 
                                 if opc == 'D':
                                     print('\nDigite o índice do contato')
-                                    ind = int(input('> '))
+
                                     try:
+                                        ind = int(input('> '))
                                         assert ind <= len(self.contatos)
-                                        self.contatos.pop(ind-1)
+                                        self.contatos.pop(ind)
                                         print('\nCONTATO DELETADO.')
                                     except:
                                         print('\nCONTATO NÃO ENCONTRADO!')
 
                                     sleep(1)
+                                elif opc == 'L':
+
+                                    try:
+                                        self.contatos.clear()
+                                        print('\nLISTA DE CONTATOS LIMPA.')
+                                        sleep(1)
+                                        break
+                                    except:
+                                        print('\nERRO AO LIMPAR CONTATOS!')
+                                        sleep(1)
+
                                 elif opc == 'V':
                                     break
-
-                                break
-                            except:
-                                print('\nOPÇÃO INVÁLIDA!')
-
-                            sleep(1)
-                        except:
-                            print('\nNENHUM CONTATO INSERIDO!')
-                            sleep(1)
-                            break
 
                 elif opc == 'I':
 
@@ -172,7 +182,7 @@ Obrigado. 🙏🏻😊'''
             await page.get_by_test_id('menu-bar-menu').click()
             await page.get_by_test_id('mi-logout menu-item').click()
             await page.get_by_test_id('popup-controls-ok').click()
-            await page.get_by_text('Para usar o WhatsApp no seu computador:')
+            await page.wait_for_selector(page.get_by_text('Para usar o WhatsApp no seu computador:'), timeout=0)
             await browser.close()
 
 if __name__ == '__main__':
