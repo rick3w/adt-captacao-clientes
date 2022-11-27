@@ -1,7 +1,7 @@
 import asyncio
 from os import system
 from time import sleep
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, expect
 
 class CaptacaoClientes:
 
@@ -182,7 +182,7 @@ Obrigado. 🙏🏻😊'''
             await page.get_by_test_id('menu-bar-menu').click()
             await page.get_by_test_id('mi-logout menu-item').click()
             await page.get_by_test_id('popup-controls-ok').click()
-            await page.wait_for_selector(page.get_by_text('Para usar o WhatsApp no seu computador:'), timeout=0)
+            await expect(page.get_by_text('Para usar o WhatsApp no seu computador:')).to_be_visible(timeout=0)
             await browser.close()
 
 if __name__ == '__main__':
