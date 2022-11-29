@@ -50,8 +50,9 @@ Obrigado. 🙏🏻😊'''
             else:
 
                 if opc == '1':
-
-                    print('\nNome do vendedor')
+                    system('cls')
+                    self.header()
+                    print('\nNome do vendedor:')
                     nome = input('> ').strip()
                     _nome = nome.split(' ')
 
@@ -69,7 +70,7 @@ Obrigado. 🙏🏻😊'''
                 elif opc == '2':
                     system('cls')
                     self.header()
-                    print('\nDigite o numero com DDD (EX: 82912341234)')
+                    print('\nDigite o numero com DDD: (EX: 82912341234)')
                     contato = input('> ').strip()
 
                     try:
@@ -88,6 +89,8 @@ Obrigado. 🙏🏻😊'''
                     while True:
 
                         if len(self.contatos) <= 0:
+                            system('cls')
+                            self.header()
                             print('\nNENHUM CONTATO INSERIDO!')
                             sleep(1)
                             break
