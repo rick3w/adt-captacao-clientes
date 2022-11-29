@@ -142,6 +142,8 @@ Obrigado. 🙏🏻😊'''
                         assert len(self.contatos) > 0
                         print('\nINICIANDO...')
                         asyncio.run(self.main())
+                        print('\nCAPTAÇÃO CONCLUÍDA COM SUCESSO.')
+                        sleep(1)
                         break
                     except:
                         print('\nERRO AO INICIAR!')
