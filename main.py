@@ -45,6 +45,8 @@ Obrigado. 🙏🏻😊'''
             opc = input('\n> ').strip().upper()
 
             if opc not in self.opcoes:
+                system('cls')
+                self.header()
                 print('\nOPÇÃO INVÁLIDA!')
                 sleep(1)
             else:
@@ -139,6 +141,8 @@ Obrigado. 🙏🏻😊'''
                                     break
 
                 elif opc == 'I':
+                    system('cls')
+                    self.header()
 
                     try:
                         assert self.vendedor != ''
@@ -153,6 +157,8 @@ Obrigado. 🙏🏻😊'''
                         sleep(1)
 
                 elif opc == 'R':
+                    system('cls')
+                    self.header()
                     print('\nEM BREVE...')
                     sleep(1)
 
