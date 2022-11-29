@@ -150,11 +150,10 @@ Obrigado. 🙏🏻😊'''
                         print('\nINICIANDO...')
                         asyncio.run(self.main())
                         print('\nCAPTAÇÃO CONCLUÍDA COM SUCESSO.')
-                        sleep(1)
-                        break
                     except:
                         print('\nERRO AO INICIAR!')
-                        sleep(1)
+
+                    sleep(1)
 
                 elif opc == 'R':
                     system('cls')
