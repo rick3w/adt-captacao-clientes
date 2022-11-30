@@ -1,7 +1,8 @@
 import asyncio
 import msvcrt
 from os import system
-from wapp_web import *
+from time import sleep
+from wapp_web import captar_clientes
 
 class CaptacaoClientes:
 
@@ -103,6 +104,7 @@ class CaptacaoClientes:
                         assert len(self.contatos) > 0
                         print('\nINICIANDO...')
                         asyncio.run(captar_clientes(self.vendedor, self.contatos))
+                        print('\nCAPTAÇÃO CONCLUIDA.')
                     except:
                         print('\nNÃO FOI POSSÍVEL INICIAR!')
                         sleep(1)

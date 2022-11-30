@@ -1,18 +1,17 @@
-from time import sleep
-from playwright.async_api import async_playwright, expect
+from playwright.async_api import async_playwright
 
 def script(vendedor):
     return f'''Olá, tudo bem!? 🙋🏻‍♂️
-    Sou o {vendedor}, do Atacadão da Tecnologia.
+Sou o {vendedor}, do Atacadão da Tecnologia.
 
-    O motivo do meu contato é para informar que toda a loja está com desconto de até 70%.
+O motivo do meu contato é para informar que toda a loja está com desconto de até 70%.
 
-    Temos um grande mix de produtos, headset, fones bluetooth, mouse, teclado, acessórios gamers, cabos, smartwach, caixas de som e monitor com descontos imperdíveis.
-    Computadores i3 de R$2.399,90 por R$1.399,90...
-    R$1.000,00 de desconto 👏🏻👏🏻👏🏻
+Temos um grande mix de produtos, headset, fones bluetooth, mouse, teclado, acessórios gamers, cabos, smartwach, caixas de som e monitor com descontos imperdíveis.
+Computadores i3 de R$2.399,90 por R$1.399,90...
+R$1.000,00 de desconto 👏🏻👏🏻👏🏻
 
-    Fazemos entrega para toda Maceió!
-    Obrigado. 🙏🏻😊'''
+Fazemos entrega para toda Maceió!
+Obrigado. 🙏🏻😊'''
 
 async def captar_clientes(vendedor, contatos):
 
@@ -25,24 +24,21 @@ async def captar_clientes(vendedor, contatos):
 
             while True:
 
-                try:
-                    await expect(page.get_by_test_id('conversation-compose-box-input')).to_be_visible(timeout=1000)
-                    await page.get_by_test_id('conversation-compose-box-input').fill(script(vendedor))
-                    await page.get_by_test_id('compose-btn-send').click()
-                    await page.get_by_test_id('conversation-clip').click()
+                if await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').is_visible(timeout=1000):
+                    await page.wait_for_load_state('networkidle')
+                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').fill(script(vendedor))
+                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
+                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div').click()
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input').set_input_files('black.jpg')
                     await page.locator('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div').click()
-                    sleep(2)
+                    await page.wait_for_load_state('networkidle')
                     break
-                except:
-                    try:
-                        await expect(page.get_by_label('O número de telefone compartilhado através de url é inválido.')).to_be_visible(timeout=1000)
-                        break
-                    except:
-                        pass
+                elif await page.locator('//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[1]').is_visible(timeout=1000):
+                    await page.locator('//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[2]/div/div').click()
+                    break
 
-        await page.get_by_test_id('menu-bar-menu').click()
-        await page.get_by_test_id('mi-logout menu-item').click()
-        await page.get_by_test_id('popup-controls-ok').click()
-        await expect(page.get_by_label('Para usar o WhatsApp no seu computador:')).to_be_visible(timeout=0)
+        await page.locator('//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/div').click()
+        await page.locator('//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/span/div/ul/li[4]').click()
+        await page.locator('//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[3]/div/div[2]').click()
+        await page.wait_for_load_state('networkidle')
         await browser.close()
