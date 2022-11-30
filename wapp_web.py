@@ -23,9 +23,9 @@ async def captar_clientes(vendedor, contatos):
             await page.goto(f'https://web.whatsapp.com/send/?phone=55{contato}&text&type=phone_number&app_absent=0')
 
             while True:
+                await page.wait_for_load_state('networkidle')
 
                 if await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').is_visible(timeout=1000):
-                    await page.wait_for_load_state('networkidle')
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').fill(script(vendedor))
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div').click()
