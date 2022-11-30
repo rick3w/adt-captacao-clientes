@@ -25,16 +25,16 @@ async def captar_clientes(vendedor, contatos):
             while True:
                 await page.wait_for_load_state('networkidle')
 
-                if await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').is_visible(timeout=1000):
-                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]').fill(script(vendedor))
-                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
-                    await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div').click()
+                if await page.get_by_test_id('conversation-compose-box-input').is_visible(timeout=1000):
+                    await page.get_by_test_id('conversation-compose-box-input').fill(script(vendedor))
+                    await page.get_by_test_id('compose-btn-send').click()
+                    await page.get_by_label('Anexar').click()
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input').set_input_files('black.jpg')
-                    await page.locator('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div').click()
+                    await page.get_by_label('Enviar').click()
                     await page.wait_for_load_state('networkidle')
                     break
-                elif await page.locator('//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[1]').is_visible(timeout=1000):
-                    await page.locator('//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[2]/div/div').click()
+                elif await page.get_by_text('O número de telefone compartilhado através de url é inválido.').is_visible(timeout=1000):
+                    await page.get_by_test_id('popup-controls-ok').click()
                     break
 
         await page.locator('//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/div').click()
