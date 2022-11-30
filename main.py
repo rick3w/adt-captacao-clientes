@@ -76,7 +76,7 @@ class CaptacaoClientes:
     def deletar_contato(self):
         pass
 
-    def iniciar(self):
+    def main(self):
 
         while True:
             opc = self.tela_home()
@@ -115,4 +115,4 @@ class CaptacaoClientes:
                 sleep(1)
 
 if __name__ == '__main__':
-    CaptacaoClientes().iniciar()
+    CaptacaoClientes().main()
