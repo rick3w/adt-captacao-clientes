@@ -85,7 +85,8 @@ class CaptacaoClientes:
             print('\nCAPTAÇÃO CONCLUIDA.')
         except:
             print('\nNÃO FOI POSSÍVEL INICIAR!')
-            sleep(1)
+
+        sleep(1)
 
     def main(self):
 
