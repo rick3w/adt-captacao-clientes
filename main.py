@@ -1,90 +1,104 @@
 import asyncio
+import msvcrt
 from os import system
 from time import sleep
+<<<<<<< HEAD
 from playwright.async_api import async_playwright, expect
+=======
+from wapp_web import captar_clientes
+>>>>>>> eeec5cbe6260f67f5ca2c9efd1bb44716541e172
 
 class CaptacaoClientes:
 
     def __init__(self) -> None:
         self.vendedor = ''
         self.contatos = []
-        self.opcoes = ['I', 'R', 'S', '1', '2', '3']
 
-    def script(self):
-        return f'''Olá, tudo bem!? 🙋🏻‍♂️
-Sou o {self.vendedor}, do Atacadão da Tecnologia.
-
-O motivo do meu contato é para informar que toda a loja está com desconto de até 70%.
-
-Temos um grande mix de produtos, headset, fones bluetooth, mouse, teclado, acessórios gamers, cabos, smartwach, caixas de som e monitor com descontos imperdíveis.
-Computadores i3 de R$2.399,90 por R$1.399,90...
-R$1.000,00 de desconto 👏🏻👏🏻👏🏻
-
-Fazemos entrega para toda Maceió!
-Obrigado. 🙏🏻😊'''
-
-    def header(self):
-        print(f'_'*50)
-        print('')
+    def cabecalho(self):
+        system('cls')
+        print(f'―'*50)
         print(f'{"ATACADÃO DA TECNOLOGIA - CAPTAÇÃO DE CLIENTES":^50}')
-        print(f'_'*50)
-        print(f'\nVendedor: {self.vendedor}')
-        print(f'Contatos: {len(self.contatos)}')
-        print('\n[1] Inserir vendedor')
-        print('[2] Inserir contato')
-        print('[3] Ver contatos inseridos')
-        print('\n[I] Iniciar')
-        print('[R] Relatório')
-        print('[S] Sair')
+        print(f'―'*50)
 
-    def homepage(self):
+    def tela_home(self):
+        self.cabecalho()
+        print(f'Vendedor: {self.vendedor}')
+        print(f'Contatos: {len(self.contatos)}')
+        print('\n[1] Inserir Vendedor')
+        print('[2] Inserir Contatos')
+        print('[3] Ver Contatos Inseridos')
+        print('[4] Deletar Contatos')
+        print('\n[I] Iniciar')
+        print('[S] Sair')
+        opc = input('\n> ').strip().upper()
+        return opc
+
+    def inserir_vendedor(self):
+        self.cabecalho()
+        print('\nNome do Vendedor:')
+        nome = input('> ').strip()
+        _nome = nome.split(' ')
+
+        try:
+            for x in _nome:
+                assert x.isalpha()
+
+            self.vendedor = nome.title()
+        except:
+            print('\nNOME INVÁLIDO!')
+            sleep(1)
+
+    def inserir_contato(self):
+        self.cabecalho()
+        print('\nNúmero do Cliente: (Ex: 82912345678)')
+        numero = input('> ').strip()
+
+        try:
+            assert numero.isdigit()
+            assert len(numero) == 11
+            assert numero not in self.contatos
+            self.contatos.append(numero)
+        except:
+            print('\nNÚMERO INVÁLIDO!')
+            sleep(1)
+
+    def ver_contatos(self):
+
+        try:
+            assert len(self.contatos) > 0
+            self.cabecalho()
+
+            for i, x in enumerate(self.contatos):
+                print(f'{i} - {x}')
+
+            print('\nPressione qualquer tecla pra voltar...')
+            _ = msvcrt.getch()
+
+        except:
+            print('\nLISTA DE CONTATOS VAZIA!')
+            sleep(1)
+
+    def deletar_contato(self):
+        pass
+
+    def iniciar(self):
 
         while True:
-            system('cls')
-            self.header()
-            opc = input('\n> ').strip().upper()
+            opc = self.tela_home()
 
-            if opc not in self.opcoes:
-                print('\nOPÇÃO INVÁLIDA!')
-                sleep(1)
-            else:
+            try:
+                assert opc in ['1', '2', '3', '4', 'I', 'S']
 
                 if opc == '1':
-
-                    print('\nNome do vendedor')
-                    nome = input('> ').strip()
-                    _nome = nome.split(' ')
-
-                    try:
-                        for x in _nome:
-                            assert x.isalpha()
-
-                        self.vendedor = nome.title()
-                        print('\nNOME INSERIDO.')
-                    except:
-                        print('\nNOME INVÁLIDO!')
-
-                    sleep(1)
+                    self.inserir_vendedor()
 
                 elif opc == '2':
-                    system('cls')
-                    self.header()
-                    print('\nDigite o numero com DDD (EX: 82912341234)')
-                    contato = input('> ').strip()
-
-                    try:
-                        assert contato.isdigit()
-                        assert len(contato) == 11
-                        assert contato not in self.contatos
-                        self.contatos.append(contato)
-                        print('\nNÚMERO INSERIDO.')
-                    except:
-                        print('\nNÚMERO INVÁLIDO!')
-
-                    sleep(1)
+                    self.inserir_contato()
 
                 elif opc == '3':
+                    self.ver_contatos()
 
+<<<<<<< HEAD
                     while True:
 
                         if len(self.contatos) <= 0:
@@ -134,24 +148,34 @@ Obrigado. 🙏🏻😊'''
 
                                 elif opc == 'V':
                                     break
+=======
+                elif opc == '4':
+                    pass
+
+>>>>>>> eeec5cbe6260f67f5ca2c9efd1bb44716541e172
                 elif opc == 'I':
 
                     try:
                         assert self.vendedor != ''
                         assert len(self.contatos) > 0
                         print('\nINICIANDO...')
-                        asyncio.run(self.main())
-                        break
+                        asyncio.run(captar_clientes(self.vendedor, self.contatos))
+                        print('\nCAPTAÇÃO CONCLUIDA.')
                     except:
-                        print('\nERRO AO INICIAR!')
+                        print('\nNÃO FOI POSSÍVEL INICIAR!')
                         sleep(1)
+<<<<<<< HEAD
                 elif opc == 'R':
                     print('\nEM BREVE...')
                     sleep(1)
+=======
+
+>>>>>>> eeec5cbe6260f67f5ca2c9efd1bb44716541e172
                 elif opc == 'S':
                     print('\nSAINDO...')
                     sleep(1)
                     break
+<<<<<<< HEAD
 
     async def main(self):
 
@@ -181,6 +205,11 @@ Obrigado. 🙏🏻😊'''
             await page.get_by_test_id('popup-controls-ok').click()
             await expect(page.get_by_text('Para usar o WhatsApp no seu computador:')).to_be_visible(timeout=0)
             await browser.close()
+=======
+            except:
+                print('\nOPÇÃO INVÁLIDA!')
+                sleep(1)
+>>>>>>> eeec5cbe6260f67f5ca2c9efd1bb44716541e172
 
 if __name__ == '__main__':
-    CaptacaoClientes().homepage()
+    CaptacaoClientes().iniciar()
