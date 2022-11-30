@@ -28,17 +28,17 @@ async def captar_clientes(vendedor, contatos):
                 if await page.get_by_test_id('conversation-compose-box-input').is_visible(timeout=1000):
                     await page.get_by_test_id('conversation-compose-box-input').fill(script(vendedor))
                     await page.get_by_test_id('compose-btn-send').click()
-                    await page.get_by_label('Anexar').click()
+                    await page.get_by_title('Anexar').click()
                     await page.locator('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input').set_input_files('black.jpg')
-                    await page.get_by_label('Enviar').click()
+                    await page.locator('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div').click()
                     await page.wait_for_load_state('networkidle')
                     break
                 elif await page.get_by_text('O número de telefone compartilhado através de url é inválido.').is_visible(timeout=1000):
                     await page.get_by_test_id('popup-controls-ok').click()
                     break
 
-        await page.locator('//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/div').click()
-        await page.locator('//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/span/div/ul/li[4]').click()
-        await page.locator('//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[3]/div/div[2]').click()
+        await page.get_by_title('Mais opções').click()
+        await page.get_by_text('Desconectar').click()
+        await page.get_by_test_id('popup-controls-ok').click()
         await page.wait_for_load_state('networkidle')
         await browser.close()
