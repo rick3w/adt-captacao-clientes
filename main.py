@@ -109,7 +109,6 @@ class CaptacaoClientes:
                     print('\nSAINDO...')
                     sleep(1)
                     break
-
             except:
                 print('\nOPÇÃO INVÁLIDA!')
                 sleep(1)
