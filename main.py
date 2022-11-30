@@ -1,5 +1,5 @@
-import asyncio
 import msvcrt
+import asyncio
 from os import system
 from time import sleep
 from wapp_web import captar_clientes
