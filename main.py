@@ -98,7 +98,6 @@ class CaptacaoClientes:
                     pass
 
                 elif opc == 'I':
-
                     try:
                         assert self.vendedor != ''
                         assert len(self.contatos) > 0
