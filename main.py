@@ -69,7 +69,6 @@ class CaptacaoClientes:
 
             print('\nPressione qualquer tecla pra voltar...')
             _ = msvcrt.getch()
-
         except:
             print('\nLISTA DE CONTATOS VAZIA!')
             sleep(1)
