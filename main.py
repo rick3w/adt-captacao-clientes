@@ -18,7 +18,7 @@ class CaptacaoClientes:
 
     def tela_home(self):
         self.cabecalho()
-        print(f'Vendedor: {self.vendedor}')
+        print(f'\nVendedor: {self.vendedor}')
         print(f'Contatos: {len(self.contatos)}')
         print('\n[1] Inserir Vendedor')
         print('[2] Inserir Contatos')
