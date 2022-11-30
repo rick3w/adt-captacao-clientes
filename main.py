@@ -76,6 +76,17 @@ class CaptacaoClientes:
     def deletar_contato(self):
         pass
 
+    def iniciar(self):
+        try:
+            assert self.vendedor != ''
+            assert len(self.contatos) > 0
+            print('\nINICIANDO...')
+            asyncio.run(captar_clientes(self.vendedor, self.contatos))
+            print('\nCAPTAÇÃO CONCLUIDA.')
+        except:
+            print('\nNÃO FOI POSSÍVEL INICIAR!')
+            sleep(1)
+
     def main(self):
 
         while True:
@@ -86,30 +97,19 @@ class CaptacaoClientes:
 
                 if opc == '1':
                     self.inserir_vendedor()
-
                 elif opc == '2':
                     self.inserir_contato()
-
                 elif opc == '3':
                     self.ver_contatos()
-
                 elif opc == '4':
                     pass
-
                 elif opc == 'I':
-                    try:
-                        assert self.vendedor != ''
-                        assert len(self.contatos) > 0
-                        print('\nINICIANDO...')
-                        asyncio.run(captar_clientes(self.vendedor, self.contatos))
-                        print('\nCAPTAÇÃO CONCLUIDA.')
-                    except:
-                        print('\nNÃO FOI POSSÍVEL INICIAR!')
-                        sleep(1)
+                    self.iniciar()
                 elif opc == 'S':
                     print('\nSAINDO...')
                     sleep(1)
                     break
+
             except:
                 print('\nOPÇÃO INVÁLIDA!')
                 sleep(1)
